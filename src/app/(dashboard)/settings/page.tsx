@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import { profileSchema, notificationsSchema, type ProfileFormValues, type NotificationsFormValues } from '@/lib/validations/settings'
+import { profileSchema, notificationsSchema, changePasswordSchema, type ProfileFormValues, type NotificationsFormValues, type ChangePasswordValues } from '@/lib/validations/settings'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -31,7 +31,8 @@ function ProfileTab() {
     defaultValues: { name: '홍길동', email: 'user@example.com', bio: '' },
   })
 
-  async function onSubmit() {
+  async function onSubmit(_values: ProfileFormValues) {
+    // TODO: await updateProfileApi(_values)
     await new Promise((r) => setTimeout(r, 1000))
     toast.success('프로필이 업데이트되었습니다')
   }
@@ -109,6 +110,18 @@ function ProfileTab() {
 }
 
 function AccountTab() {
+  const form = useForm<ChangePasswordValues>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: { currentPassword: '', newPassword: '', confirmNewPassword: '' },
+  })
+
+  async function onSubmit(_values: ChangePasswordValues) {
+    // TODO: await changePasswordApi(_values)
+    await new Promise((r) => setTimeout(r, 1000))
+    toast.success('비밀번호가 변경되었습니다')
+    form.reset()
+  }
+
   return (
     <div className="space-y-4">
       <Card>
@@ -116,24 +129,60 @@ function AccountTab() {
           <CardTitle>비밀번호 변경</CardTitle>
           <CardDescription>계정 보안을 위해 주기적으로 변경해주세요</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-2">
-            <label className="text-sm font-medium">현재 비밀번호</label>
-            <Input type="password" placeholder="••••••••" />
-          </div>
-          <div className="grid gap-2">
-            <label className="text-sm font-medium">새 비밀번호</label>
-            <Input type="password" placeholder="••••••••" />
-          </div>
-          <div className="grid gap-2">
-            <label className="text-sm font-medium">새 비밀번호 확인</label>
-            <Input type="password" placeholder="••••••••" />
-          </div>
-          <div className="flex justify-end">
-            <Button onClick={() => toast.success('비밀번호가 변경되었습니다')}>
-              비밀번호 변경
-            </Button>
-          </div>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="currentPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>현재 비밀번호</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="newPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>새 비밀번호</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormDescription>8자 이상, 대문자 및 숫자를 포함해야 합니다</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmNewPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>새 비밀번호 확인</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-end">
+                <LoadingButton
+                  type="submit"
+                  isPending={form.formState.isSubmitting}
+                  pendingText="변경 중..."
+                >
+                  비밀번호 변경
+                </LoadingButton>
+              </div>
+            </form>
+          </Form>
         </CardContent>
       </Card>
 
@@ -176,7 +225,8 @@ function NotificationsTab() {
     },
   })
 
-  async function onSubmit() {
+  async function onSubmit(_values: NotificationsFormValues) {
+    // TODO: await updateNotificationsApi(_values)
     await new Promise((r) => setTimeout(r, 800))
     toast.success('알림 설정이 저장되었습니다')
   }
