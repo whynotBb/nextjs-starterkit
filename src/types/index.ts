@@ -1,7 +1,9 @@
+export type NavIconKey = 'LayoutDashboard' | 'Settings' | 'LayoutGrid'
+
 export interface NavItem {
   title: string
   href: string
-  icon?: string
+  icon?: NavIconKey
   disabled?: boolean
   external?: boolean
 }
