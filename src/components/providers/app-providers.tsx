@@ -28,7 +28,9 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
           <Toaster richColors closeButton />
         </TooltipProvider>
       </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {process.env.NODE_ENV === 'development' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
     </QueryClientProvider>
   )
 }

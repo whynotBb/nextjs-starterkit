@@ -25,6 +25,7 @@ export default function RegisterPage() {
 
   async function onSubmit(values: RegisterFormValues) {
     try {
+      // TODO: 실제 API 호출로 교체 — await registerApi(values)
       await new Promise((resolve) => setTimeout(resolve, 1500))
       toast.success('회원가입 완료', { description: `${values.email}로 가입되었습니다.` })
     } catch {

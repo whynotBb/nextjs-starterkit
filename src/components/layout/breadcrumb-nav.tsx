@@ -15,7 +15,9 @@ import { Home } from 'lucide-react'
 export function BreadcrumbNav() {
   const pathname = usePathname()
 
-  const current = NAV_ITEMS.find((item) => item.href === pathname)
+  const current =
+    NAV_ITEMS.find((item) => item.href === pathname) ??
+    NAV_ITEMS.find((item) => pathname.startsWith(item.href + '/'))
 
   if (!current) return null
 

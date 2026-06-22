@@ -25,6 +25,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: LoginFormValues) {
     try {
+      // TODO: 실제 API 호출로 교체 — await loginApi(values)
       await new Promise((resolve) => setTimeout(resolve, 1200))
       toast.success('로그인 성공', { description: `${values.email}으로 로그인되었습니다.` })
     } catch {
