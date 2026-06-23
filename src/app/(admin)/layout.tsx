@@ -4,7 +4,7 @@ import { ThemeToggle } from '@/components/layout/theme-toggle'
 import { UserNav } from '@/components/composite/user-nav'
 import { BreadcrumbNav } from '@/components/layout/breadcrumb-nav'
 
-export default function DashboardLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
@@ -18,7 +18,7 @@ export default function DashboardLayout({
           <BreadcrumbNav />
           <div className="flex-1" />
           <ThemeToggle />
-          <UserNav user={{ name: '홍길동', email: 'user@example.com' }} />
+          <UserNav />
         </header>
         <main className="flex-1 p-6">{children}</main>
       </div>

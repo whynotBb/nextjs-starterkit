@@ -1,13 +1,14 @@
-// TODO: 실제 인증 연동 시 useAuthStore를 DashboardLayout 및 라우트 보호 로직에 연결하세요
-// proxy.ts 또는 레이아웃에서 isAuthenticated 를 확인해 미인증 사용자를 /login 으로 리다이렉트합니다
+// Supabase Auth 연동 시 useAuthStore를 레이아웃 및 라우트 보호 로직에 연결하세요
+// proxy.ts 또는 레이아웃에서 isAuthenticated를 확인해 미인증 사용자를 /admin/login으로 리다이렉트합니다
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { UserRole } from '@/types'
 
 interface User {
   id: string
-  name: string
   email: string
-  image?: string
+  name?: string
+  role: UserRole
 }
 
 interface AuthStore {

@@ -2,15 +2,29 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Settings, LayoutGrid } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Users,
+  Newspaper,
+  UserCheck,
+  Building2,
+  Video,
+  Image,
+  Shield,
+} from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { NavItem, NavIconKey } from '@/types'
 
 const iconMap: Record<NavIconKey, LucideIcon> = {
   LayoutDashboard,
-  Settings,
-  LayoutGrid,
+  Users,
+  Newspaper,
+  UserCheck,
+  Building2,
+  Video,
+  Image,
+  Shield,
 }
 
 interface NavLinkProps {

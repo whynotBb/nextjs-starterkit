@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: LoginFormValues) {
     try {
-      // TODO: 실제 API 호출로 교체 — await loginApi(values)
+      // TODO: Supabase Auth 연동으로 교체
       await new Promise((resolve) => setTimeout(resolve, 1200))
       toast.success('로그인 성공', { description: `${values.email}으로 로그인되었습니다.` })
     } catch {
@@ -36,7 +36,7 @@ export default function LoginPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">로그인</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">관리자 로그인</h1>
         <p className="text-sm text-muted-foreground">
           이메일과 비밀번호를 입력해주세요
         </p>
@@ -62,15 +62,7 @@ export default function LoginPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <div className="flex items-center justify-between">
-                  <FormLabel>비밀번호</FormLabel>
-                  <Link
-                    href="/forgot-password"
-                    className="text-xs text-muted-foreground hover:text-foreground"
-                  >
-                    비밀번호 찾기
-                  </Link>
-                </div>
+                <FormLabel>비밀번호</FormLabel>
                 <FormControl>
                   <Input placeholder="••••••••" type="password" {...field} />
                 </FormControl>
@@ -98,7 +90,7 @@ export default function LoginPage() {
 
       <p className="text-center text-sm text-muted-foreground">
         계정이 없으신가요?{' '}
-        <Link href="/register" className="font-medium text-foreground hover:underline">
+        <Link href="/admin/register" className="font-medium text-foreground hover:underline">
           회원가입
         </Link>
       </p>

@@ -25,9 +25,11 @@ export default function RegisterPage() {
 
   async function onSubmit(values: RegisterFormValues) {
     try {
-      // TODO: 실제 API 호출로 교체 — await registerApi(values)
+      // TODO: Supabase Auth 이메일 인증 연동으로 교체
       await new Promise((resolve) => setTimeout(resolve, 1500))
-      toast.success('회원가입 완료', { description: `${values.email}로 가입되었습니다.` })
+      toast.success('회원가입 완료', {
+        description: `${values.email}로 인증 메일이 발송되었습니다.`,
+      })
     } catch {
       toast.error('회원가입 실패', { description: '잠시 후 다시 시도해주세요.' })
     }
@@ -38,7 +40,7 @@ export default function RegisterPage() {
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight">회원가입</h1>
         <p className="text-sm text-muted-foreground">
-          아래 정보를 입력하여 계정을 만드세요
+          아래 정보를 입력하여 관리자 계정을 만드세요
         </p>
       </div>
 
@@ -112,7 +114,7 @@ export default function RegisterPage() {
 
       <p className="text-center text-sm text-muted-foreground">
         이미 계정이 있으신가요?{' '}
-        <Link href="/login" className="font-medium text-foreground hover:underline">
+        <Link href="/admin/login" className="font-medium text-foreground hover:underline">
           로그인
         </Link>
       </p>
