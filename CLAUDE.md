@@ -1,4 +1,10 @@
-# CLAUDE.md
+# 🤖 Claude Code 개발 지침
+
+**사이니지 관리 시스템**은 하드코딩으로 운영되던 사이니지 콘텐츠를 비개발자도 웹 인터페이스로 자율 편집하고, 변경 사항이 Supabase Realtime을 통해 디스플레이 화면에 즉시 반영되도록 하는 관리 시스템입니다.
+
+📋 상세 프로젝트 요구사항은 @/docs/PRD.md 참조
+
+---
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -24,16 +30,23 @@ npx next typegen
 
 ```
 src/app/
-  layout.tsx            # 루트 레이아웃 (AppProviders, 다크모드 인라인 스크립트)
-  (landing)/            # 랜딩 페이지 — Header/Footer 레이아웃
-  (dashboard)/          # 대시보드 — Sidebar + 헤더 레이아웃
-    layout.tsx          # Sidebar, MobileNav, BreadcrumbNav, ThemeToggle, UserNav
-    dashboard/page.tsx
-    components/page.tsx  # UI 컴포넌트 데모
-    settings/page.tsx
-  (auth)/               # 인증 — 심플한 카드 레이아웃
-    login/page.tsx
-    register/page.tsx
+  layout.tsx                          # 루트 레이아웃 (AppProviders, 다크모드 인라인 스크립트)
+  page.tsx                            # 디스플레이 화면 (/, 풀스크린 사이니지, 공개)
+  (admin)/                            # 관리자 앱 — Sidebar + 헤더 레이아웃 (PC~모바일 반응형)
+    layout.tsx                        # Sidebar, MobileNav, BreadcrumbNav, ThemeToggle, UserNav
+    admin/
+      dashboard/page.tsx              # 대시보드 (/admin/dashboard)
+      org/page.tsx                    # 조직도 관리 (/admin/org)
+      news/page.tsx                   # 뉴스 관리 (/admin/news)
+      visitor/page.tsx                # 방문자 관리 (/admin/visitor)
+      company-intro/page.tsx          # 회사소개 관리 (/admin/company-intro)
+      video/page.tsx                  # 동영상 관리 (/admin/video)
+      image/page.tsx                  # 이미지 관리 (/admin/image)
+      users/page.tsx                  # 사용자 관리 (/admin/users, super_admin만)
+  (admin-auth)/                       # 인증 — 심플한 카드 레이아웃
+    admin/
+      login/page.tsx                  # 로그인 (/admin/login)
+      register/page.tsx               # 회원가입 (/admin/register)
 ```
 
 ### 컴포넌트 레이어
